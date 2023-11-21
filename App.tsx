@@ -1,16 +1,19 @@
 import * as React from 'react';
 
-import {Text, SafeAreaView, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {styles} from './App.style';
+import {MealEntryForm} from './Components/MealEntryForm/MealEntryForm';
 
 const App = () => {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <SafeAreaView style={styles.app}>
-      <View style={styles.app}>
-        <Text>Turkey Timer 2023</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Meal Entry" component={MealEntryForm} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
