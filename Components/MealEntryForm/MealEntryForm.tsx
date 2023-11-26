@@ -6,6 +6,8 @@ import {SelectList} from 'react-native-dropdown-select-list';
 import {elements} from '../../styles';
 import {styles} from './MealEntryForm.style';
 
+import {store} from '../../System/Store';
+
 const prepTimeValues = [
   {key: 1, value: 'hours'},
   {key: 2, value: 'minutes'},
@@ -18,6 +20,13 @@ export const MealEntryForm = () => {
 
   const handleNewItem = (): void => {
     console.log(menuItemName, prepTime, prepTimeUnit);
+    store.set(`menuItems.${menuItemName}.name`, menuItemName);
+  };
+
+  const printStore = (): void => {
+    const keys = store.getAllKeys();
+
+    console.log(keys);
   };
 
   return (
@@ -56,6 +65,7 @@ export const MealEntryForm = () => {
           </View>
         </View>
         <Button title="Add Item" onPress={handleNewItem} />
+        <Button title="View Store" onPress={printStore} />
       </View>
     </SafeAreaView>
   );
