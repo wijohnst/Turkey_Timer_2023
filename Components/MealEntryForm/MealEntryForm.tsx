@@ -19,14 +19,13 @@ export const MealEntryForm = () => {
   const [prepTimeUnit, setPrepTimeUnit] = React.useState<string>('minutes');
 
   const handleNewItem = (): void => {
-    console.log(menuItemName, prepTime, prepTimeUnit);
-    store.set(`menuItems.${menuItemName}.name`, menuItemName);
+    store.setMenuItem({name: menuItemName, id: 'xxx', prepTime: 60});
   };
 
   const printStore = (): void => {
-    const keys = store.getAllKeys();
+    const menuItems = store.getMenuItems();
 
-    console.log(keys);
+    console.log(menuItems);
   };
 
   return (
@@ -66,6 +65,7 @@ export const MealEntryForm = () => {
         </View>
         <Button title="Add Item" onPress={handleNewItem} />
         <Button title="View Store" onPress={printStore} />
+        <Button title="Clear Store" onPress={store.clearStore} />
       </View>
     </SafeAreaView>
   );

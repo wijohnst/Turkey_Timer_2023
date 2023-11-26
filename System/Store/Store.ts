@@ -1,15 +1,8 @@
 import {MMKV} from 'react-native-mmkv';
 
-export const store = new MMKV();
+import {MenuItem} from '../../data/types';
 
-export type MenuItem = {
-  /** UUID */
-  id: string;
-  /** Name of the dish of prep item */
-  name: string;
-  /** Prep time in hours */
-  prepTime: number;
-};
+export const mmkv = new MMKV();
 
 export interface IStore {
   store: MMKV;
@@ -17,6 +10,7 @@ export interface IStore {
   getMenuItems(): MenuItem[];
   setMenuItem: (menuItem: MenuItem) => void;
   getMenuItem: (menuItemName: string) => MenuItem | undefined;
+  clearStore: () => void;
 }
 
 export const StorePrefixMap = {
@@ -40,12 +34,14 @@ export class Store implements IStore {
 
     return allKeys.reduce((menuItems: MenuItem[], targetKey: string) => {
       const hasVal = this.store.contains(targetKey);
+      const keyIsMenuItem = targetKey.includes(StorePrefixMap.MENU_ITEMS);
 
-      if (!hasVal) {
+      if (!hasVal || !keyIsMenuItem) {
         return menuItems;
       }
 
       const targetValAsString = this.store.getString(targetKey) ?? '';
+
       return [...menuItems, JSON.parse(targetValAsString) as MenuItem];
     }, []);
   };
@@ -56,9 +52,10 @@ export class Store implements IStore {
    * @param { MenuItem }menuItem
    */
   setMenuItem = (menuItem: MenuItem): void => {
+    const stringifiedValue = JSON.stringify(menuItem);
     this.store.set(
       `${StorePrefixMap.MENU_ITEMS}${menuItem.name}`,
-      JSON.stringify(menuItem),
+      stringifiedValue,
     );
   };
 
@@ -81,4 +78,10 @@ export class Store implements IStore {
 
     return JSON.parse(targetVal);
   };
+
+  clearStore = (): void => {
+    this.store.clearAll();
+  };
 }
+
+export const store = new Store(mmkv);
