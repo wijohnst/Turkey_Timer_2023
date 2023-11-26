@@ -10,10 +10,23 @@ export const styles = StyleSheet.create({
   MealEntryFormLabel: {
     marginBottom: 10,
   },
+  MenuItemNameInput: {},
   TimeGroup: {
     marginTop: 20,
   },
   TimeUnitGroup: {
-    backgroundColor: 'lightpink',
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    height: 50,
+  },
+  PrepTimeInput: {
+    padding: 10,
+    marginRight: 10,
+    width: '60%',
+  },
+  SelectWrapper: {
+    height: 50,
+    minWidth: '37%',
   },
 });
