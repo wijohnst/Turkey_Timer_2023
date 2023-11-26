@@ -7,6 +7,8 @@ import {elements} from '../../styles';
 import {styles} from './MealEntryForm.style';
 
 import {store} from '../../System/Store';
+import {MenuItemFactory} from '../../data';
+import {PrepUnit} from '../../data/types';
 
 const prepTimeValues = [
   {key: 1, value: 'hours'},
@@ -14,18 +16,32 @@ const prepTimeValues = [
 ];
 
 export const MealEntryForm = () => {
+  const menuItemFactory = new MenuItemFactory();
+
   const [menuItemName, setMenuItemName] = React.useState<string>('');
   const [prepTime, setPrepTime] = React.useState<string>('');
-  const [prepTimeUnit, setPrepTimeUnit] = React.useState<string>('minutes');
+  const [prepTimeUnit, setPrepTimeUnit] = React.useState<PrepUnit>('minutes');
 
   const handleNewItem = (): void => {
-    store.setMenuItem({name: menuItemName, id: 'xxx', prepTime: 60});
+    console.log(prepTimeUnit);
+    const menuItem = menuItemFactory.generateMenuItem(
+      menuItemName,
+      prepTime,
+      prepTimeUnit,
+    );
+    store.setMenuItem(menuItem);
   };
 
   const printStore = (): void => {
     const menuItems = store.getMenuItems();
 
     console.log(menuItems);
+  };
+
+  const clearForm = (): void => {
+    setMenuItemName('');
+    setPrepTime('');
+    setPrepTimeUnit('minutes');
   };
 
   return (
@@ -40,6 +56,7 @@ export const MealEntryForm = () => {
             style={[elements.textInput, styles.MenuItemNameInput]}
             placeholder="What dish or prep item are you making?"
             onChangeText={setMenuItemName}
+            value={menuItemName}
           />
         </View>
         <View style={styles.TimeGroup}>
@@ -63,9 +80,12 @@ export const MealEntryForm = () => {
             </View>
           </View>
         </View>
-        <Button title="Add Item" onPress={handleNewItem} />
-        <Button title="View Store" onPress={printStore} />
-        <Button title="Clear Store" onPress={store.clearStore} />
+        <View style={styles.FormControls}>
+          <Button title="Add Item" onPress={handleNewItem} />
+          <Button title="View Store" onPress={printStore} />
+          <Button title="Clear Store" onPress={store.clearStore} />
+          <Button title="Clear Form" onPress={clearForm} />
+        </View>
       </View>
     </SafeAreaView>
   );

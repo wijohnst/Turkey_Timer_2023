@@ -1,6 +1,8 @@
 import {MMKV} from 'react-native-mmkv';
 
-import {Store, IStore, MenuItem} from './Store';
+import {Store, IStore} from './Store';
+
+import {MenuItem} from '../../data/types';
 
 import {describe, expect, it} from '@jest/globals';
 

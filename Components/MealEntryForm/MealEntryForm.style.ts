@@ -29,4 +29,10 @@ export const styles = StyleSheet.create({
     height: 50,
     minWidth: '37%',
   },
+  FormControls: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 100,
+  },
 });
