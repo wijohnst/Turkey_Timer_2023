@@ -7,4 +7,10 @@ export const styles = StyleSheet.create({
   LabelInput: {
     marginTop: 20,
   },
+  DatePickerWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 20,
+  },
 });

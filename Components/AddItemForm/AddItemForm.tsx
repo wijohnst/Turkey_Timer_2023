@@ -26,7 +26,6 @@ export const AddItemForm = () => {
 
   const handleNewItem = (): void => {
     if (!hasValidationError) {
-      console.log(prepTimeUnit);
       const menuItem = menuItemFactory.generateMenuItem(
         menuItemName,
         prepTime,
