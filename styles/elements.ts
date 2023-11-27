@@ -16,4 +16,8 @@ export const elements = StyleSheet.create({
     height: 40,
     padding: 5,
   },
+  errorText: {
+    color: 'red',
+    fontWeight: 'bold',
+  },
 });

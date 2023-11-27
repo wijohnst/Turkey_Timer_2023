@@ -36,7 +36,6 @@ export const styles = StyleSheet.create({
     marginTop: 100,
   },
   ValidationErrors: {
-    color: 'red',
     marginTop: 20,
   },
 });

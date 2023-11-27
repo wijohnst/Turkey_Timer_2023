@@ -13,4 +13,6 @@ export const styles = StyleSheet.create({
     padding: 10,
     marginTop: 20,
   },
+  ValidationErrors: {},
+  ControlsWrapper: {},
 });

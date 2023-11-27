@@ -105,7 +105,9 @@ export const AddItemForm = () => {
         </View>
       </View>
       <View style={styles.ValidationErrors}>
-        <Text>{hasValidationError ? 'Validation Errors Present' : ''}</Text>
+        <Text style={elements.errorText}>
+          {hasValidationError ? 'Validation Errors Present' : ''}
+        </Text>
       </View>
     </SafeAreaView>
   );
