@@ -85,6 +85,11 @@ export class Store implements IStore {
     return JSON.parse(targetVal);
   };
 
+  /**
+   * Returns a Meal or undefined if a meal cannot be found
+   *
+   * @returns {Meal | undefined}
+   */
   getMeal = (): Meal | undefined => {
     const meal = this.store.getString('meal');
 
@@ -92,17 +97,23 @@ export class Store implements IStore {
       return undefined;
     }
 
-    const parsedMeal = JSON.parse(meal) as unknown as Meal;
+    const {serviceTime} = JSON.parse(meal) as unknown as Meal;
 
-    console.log(parsedMeal.serviceTime);
-
-    return new MealFactory().generateMeal(parsedMeal.serviceTime);
+    return new MealFactory().generateMeal(new Date(serviceTime));
   };
 
+  /**
+   * Adds a Meal to the store
+   *
+   * @param { Meal }meal
+   */
   setMeal = (meal: Meal): void => {
     this.store.set(StorePrefixMap.MEAL, JSON.stringify(meal));
   };
 
+  /**
+   * Clears the store
+   */
   clearStore = (): void => {
     this.store.clearAll();
   };

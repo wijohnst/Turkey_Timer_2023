@@ -4,16 +4,27 @@ import {Store, IStore} from './Store';
 
 import {Meal, MenuItem} from '../../data/types';
 
-import {describe, expect, it} from '@jest/globals';
+import {describe, expect, it, jest} from '@jest/globals';
+import {MealFactory} from '../../data';
+
+jest.mock('uuid', () => {
+  const base = '9134e286-6f71-427a-bf00-';
+  let current = 100000000000;
+
+  return {
+    v4: () => {
+      const uuid = base + current.toString();
+      current++;
+
+      return uuid;
+    },
+  };
+});
 
 const menuItemStub: MenuItem = {
   id: '1',
   name: 'Foo',
   prepTime: 1,
-};
-
-const mealStub: Meal = {
-  serviceTime: new Date('2021-01-01T00:00:00.000Z'),
 };
 
 describe('Store', () => {
@@ -90,6 +101,9 @@ describe('Store', () => {
     it('✅ should return a meal', () => {
       sut = getSut();
 
+      const mealStub = new MealFactory().generateMeal(
+        new Date('2021-01-01T00:00:00.000Z'),
+      );
       sut.setMeal(mealStub);
 
       expect(sut.getMeal()).toEqual(mealStub);
