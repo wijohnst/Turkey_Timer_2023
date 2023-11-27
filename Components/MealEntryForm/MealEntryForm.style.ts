@@ -35,4 +35,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 100,
   },
+  ValidationErrors: {
+    color: 'red',
+    marginTop: 20,
+  },
 });

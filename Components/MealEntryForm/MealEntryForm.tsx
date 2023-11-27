@@ -21,15 +21,19 @@ export const MealEntryForm = () => {
   const [menuItemName, setMenuItemName] = React.useState<string>('');
   const [prepTime, setPrepTime] = React.useState<string>('');
   const [prepTimeUnit, setPrepTimeUnit] = React.useState<PrepUnit>('minutes');
+  const [hasValidationError, setHasValidationError] =
+    React.useState<boolean>(false);
 
   const handleNewItem = (): void => {
-    console.log(prepTimeUnit);
-    const menuItem = menuItemFactory.generateMenuItem(
-      menuItemName,
-      prepTime,
-      prepTimeUnit,
-    );
-    store.setMenuItem(menuItem);
+    if (!hasValidationError) {
+      console.log(prepTimeUnit);
+      const menuItem = menuItemFactory.generateMenuItem(
+        menuItemName,
+        prepTime,
+        prepTimeUnit,
+      );
+      store.setMenuItem(menuItem);
+    }
   };
 
   const printStore = (): void => {
@@ -42,6 +46,15 @@ export const MealEntryForm = () => {
     setMenuItemName('');
     setPrepTime('');
     setPrepTimeUnit('minutes');
+    setHasValidationError(false);
+  };
+
+  const validateForm = (): void => {
+    if (menuItemName === '' || prepTime === '') {
+      setHasValidationError(true);
+    } else {
+      handleNewItem();
+    }
   };
 
   return (
@@ -76,16 +89,24 @@ export const MealEntryForm = () => {
                 setSelected={setPrepTimeUnit}
                 save="value"
                 defaultOption={prepTimeValues[0]}
+                placeholder="Select a unit"
               />
             </View>
           </View>
         </View>
         <View style={styles.FormControls}>
-          <Button title="Add Item" onPress={handleNewItem} />
+          <Button
+            title="Add Item"
+            onPress={() => validateForm()}
+            disabled={hasValidationError}
+          />
           <Button title="View Store" onPress={printStore} />
           <Button title="Clear Store" onPress={store.clearStore} />
           <Button title="Clear Form" onPress={clearForm} />
         </View>
+      </View>
+      <View style={styles.ValidationErrors}>
+        <Text>{hasValidationError ? 'Validation Errors Present' : ''}</Text>
       </View>
     </SafeAreaView>
   );
