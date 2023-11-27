@@ -4,7 +4,7 @@ import {SafeAreaView, Text, TextInput, View, Button} from 'react-native';
 import {SelectList} from 'react-native-dropdown-select-list';
 
 import {elements} from '../../styles';
-import {styles} from './AddItemForm.test';
+import {styles} from './AddItemForm.styles';
 
 import {store} from '../../System/Store';
 import {MenuItemFactory} from '../../data';
@@ -59,7 +59,7 @@ export const AddItemForm = () => {
 
   return (
     <SafeAreaView>
-      <View style={styles.MealEntryForm}>
+      <View style={styles.AddItemForm}>
         <Text style={elements.h1}>Add Item to Menu</Text>
         <View style={styles.LabelInput}>
           <Text style={[elements.label, styles.MealEntryFormLabel]}>

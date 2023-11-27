@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  MealEntryForm: {
+  AddItemForm: {
     margin: 10,
   },
   LabelInput: {
