@@ -1,7 +1,7 @@
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 
-import {IMenuItemFactory, PrepUnit} from './types';
+import {IMealFactory, IMenuItemFactory, Meal, PrepUnit} from './types';
 
 export class MenuItemFactory implements IMenuItemFactory {
   constructor() {}
@@ -24,6 +24,16 @@ export class MenuItemFactory implements IMenuItemFactory {
       id: uuidv4(),
       name: name,
       prepTime: this.getPrepTimeInHours(prepValue, prepUnit),
+    };
+  };
+}
+
+export class MealFactory implements IMealFactory {
+  constructor() {}
+
+  generateMeal = (serviceTime: Date): Meal => {
+    return {
+      serviceTime,
     };
   };
 }
