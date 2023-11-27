@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {AddItemForm} from './Components/AddItemForm/AddItemForm';
 import {AddMealForm} from './Components/AddMealForm/AddMealForm';
-import {Timer} from './Components/Timer/Timer';
+import {TimerList} from './Components/TimerList/TimerList';
 
 import {store} from './System/Store';
 
@@ -36,7 +36,7 @@ const App = () => {
         initialRouteName={getInitialRouteName()}>
         <Stack.Screen name="Meal" component={AddMealForm} />
         <Stack.Screen name="Item" component={AddItemForm} />
-        <Stack.Screen name="Timer" component={Timer} />
+        <Stack.Screen name="TimerList" component={TimerList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

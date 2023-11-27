@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {SafeAreaView, Text, TextInput, View, Button} from 'react-native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 import {SelectList} from 'react-native-dropdown-select-list';
 
 import {elements} from '../../styles';
@@ -16,6 +17,7 @@ const prepTimeValues = [
 ];
 
 export const AddItemForm = () => {
+  const navigation = useNavigation();
   const menuItemFactory = new MenuItemFactory();
 
   const [menuItemName, setMenuItemName] = React.useState<string>('');
@@ -23,6 +25,9 @@ export const AddItemForm = () => {
   const [prepTimeUnit, setPrepTimeUnit] = React.useState<PrepUnit>('minutes');
   const [hasValidationError, setHasValidationError] =
     React.useState<boolean>(false);
+  const [storedMenuItems, setStoredMenuItems] = React.useState(
+    store.getMenuItems(),
+  );
 
   const handleNewItem = (): void => {
     if (!hasValidationError) {
@@ -55,6 +60,11 @@ export const AddItemForm = () => {
     } else {
       handleNewItem();
     }
+  };
+
+  const handleContinue = (): void => {
+    console.log('handleContinue');
+    navigation.dispatch(CommonActions.navigate('TimerList'));
   };
 
   return (
@@ -100,9 +110,14 @@ export const AddItemForm = () => {
             onPress={() => validateForm()}
             disabled={hasValidationError}
           />
-          <Button title="View Store" onPress={printStore} />
-          <Button title="Clear Store" onPress={store.clearStore} />
-          <Button title="Clear Form" onPress={clearForm} />
+          <Button
+            title="Continue"
+            onPress={() => handleContinue()}
+            disabled={storedMenuItems.length === 0}
+          />
+          {/* <Button title="View Store" onPress={printStore} /> */}
+          {/* <Button title="Clear Store" onPress={store.clearStore} /> */}
+          {/* <Button title="Clear Form" onPress={clearForm} /> */}
         </View>
       </View>
       <View style={styles.ValidationErrors}>
