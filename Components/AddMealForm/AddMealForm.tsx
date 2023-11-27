@@ -57,14 +57,6 @@ export const AddMealForm = (): React.ReactElement => {
     }
   };
 
-  const handlePrintStore = (): void => {
-    console.log(store.getMeal(), store.getMenuItems());
-  };
-
-  const handleClearStore = (): void => {
-    store.clearStore();
-  };
-
   return (
     <SafeAreaView>
       <View style={styles.AddMealForm}>
@@ -81,8 +73,6 @@ export const AddMealForm = (): React.ReactElement => {
         </View>
         <View style={styles.ControlsWrapper}>
           <Button title="Add Meal" onPress={() => validateForm()} />
-          <Button title="Print Store" onPress={() => handlePrintStore()} />
-          <Button title="Clear Store" onPress={() => handleClearStore()} />
         </View>
         <View style={styles.ValidationErrors}>
           <Text style={[elements.errorText]}>

@@ -24,7 +24,7 @@ const App = () => {
       return 'Item';
     }
 
-    return 'Timer';
+    return 'TimerList';
   };
 
   return (
