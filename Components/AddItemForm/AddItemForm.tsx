@@ -4,7 +4,7 @@ import {SafeAreaView, Text, TextInput, View, Button} from 'react-native';
 import {SelectList} from 'react-native-dropdown-select-list';
 
 import {elements} from '../../styles';
-import {styles} from './MealEntryForm.style';
+import {styles} from './AddItemForm.test';
 
 import {store} from '../../System/Store';
 import {MenuItemFactory} from '../../data';
@@ -15,7 +15,7 @@ const prepTimeValues = [
   {key: 2, value: 'minutes'},
 ];
 
-export const MealEntryForm = () => {
+export const AddItemForm = () => {
   const menuItemFactory = new MenuItemFactory();
 
   const [menuItemName, setMenuItemName] = React.useState<string>('');

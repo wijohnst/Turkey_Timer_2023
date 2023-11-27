@@ -3,7 +3,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {MealEntryForm} from './Components/MealEntryForm/MealEntryForm';
+import {AddItemForm} from './Components/AddItemForm/AddItemForm';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -11,7 +11,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Meal Entry" component={MealEntryForm} />
+        <Stack.Screen name="Meal Entry" component={AddItemForm} />
       </Stack.Navigator>
     </NavigationContainer>
   );
