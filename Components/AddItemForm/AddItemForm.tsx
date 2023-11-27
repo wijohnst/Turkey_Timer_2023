@@ -37,8 +37,9 @@ export const AddItemForm = () => {
 
   const printStore = (): void => {
     const menuItems = store.getMenuItems();
+    const meal = store.getMeal();
 
-    console.log(menuItems);
+    console.log(menuItems, meal);
   };
 
   const clearForm = (): void => {
