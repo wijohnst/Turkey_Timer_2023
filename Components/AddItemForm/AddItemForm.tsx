@@ -4,7 +4,7 @@ import {SafeAreaView, Text, TextInput, View, Button} from 'react-native';
 import {SelectList} from 'react-native-dropdown-select-list';
 
 import {elements} from '../../styles';
-import {styles} from './MealEntryForm.style';
+import {styles} from './AddItemForm.styles';
 
 import {store} from '../../System/Store';
 import {MenuItemFactory} from '../../data';
@@ -15,7 +15,7 @@ const prepTimeValues = [
   {key: 2, value: 'minutes'},
 ];
 
-export const MealEntryForm = () => {
+export const AddItemForm = () => {
   const menuItemFactory = new MenuItemFactory();
 
   const [menuItemName, setMenuItemName] = React.useState<string>('');
@@ -26,7 +26,6 @@ export const MealEntryForm = () => {
 
   const handleNewItem = (): void => {
     if (!hasValidationError) {
-      console.log(prepTimeUnit);
       const menuItem = menuItemFactory.generateMenuItem(
         menuItemName,
         prepTime,
@@ -38,8 +37,9 @@ export const MealEntryForm = () => {
 
   const printStore = (): void => {
     const menuItems = store.getMenuItems();
+    const meal = store.getMeal();
 
-    console.log(menuItems);
+    console.log(menuItems, meal);
   };
 
   const clearForm = (): void => {
@@ -59,7 +59,7 @@ export const MealEntryForm = () => {
 
   return (
     <SafeAreaView>
-      <View style={styles.MealEntryForm}>
+      <View style={styles.AddItemForm}>
         <Text style={elements.h1}>Add Item to Menu</Text>
         <View style={styles.LabelInput}>
           <Text style={[elements.label, styles.MealEntryFormLabel]}>
@@ -106,7 +106,9 @@ export const MealEntryForm = () => {
         </View>
       </View>
       <View style={styles.ValidationErrors}>
-        <Text>{hasValidationError ? 'Validation Errors Present' : ''}</Text>
+        <Text style={elements.errorText}>
+          {hasValidationError ? 'Validation Errors Present' : ''}
+        </Text>
       </View>
     </SafeAreaView>
   );
