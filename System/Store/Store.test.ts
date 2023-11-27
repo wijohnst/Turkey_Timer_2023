@@ -2,7 +2,7 @@ import {MMKV} from 'react-native-mmkv';
 
 import {Store, IStore} from './Store';
 
-import {MenuItem} from '../../data/types';
+import {Meal, MenuItem} from '../../data/types';
 
 import {describe, expect, it} from '@jest/globals';
 
@@ -10,6 +10,10 @@ const menuItemStub: MenuItem = {
   id: '1',
   name: 'Foo',
   prepTime: 1,
+};
+
+const mealStub: Meal = {
+  serviceTime: new Date('2021-01-01T00:00:00.000Z'),
 };
 
 describe('Store', () => {
@@ -73,6 +77,36 @@ describe('Store', () => {
       sut = getSut();
 
       expect(sut.getMenuItem('Should not exist')).toEqual(undefined);
+    });
+  });
+
+  describe('getMeal', () => {
+    it('✅ should be defined', () => {
+      sut = getSut();
+
+      expect(sut.getMeal).toBeDefined();
+    });
+
+    it('✅ should return a meal', () => {
+      sut = getSut();
+
+      sut.setMeal(mealStub);
+
+      expect(sut.getMeal()).toEqual(mealStub);
+    });
+
+    it('✅ should return undefined', () => {
+      sut = getSut();
+
+      expect(sut.getMeal()).toEqual(undefined);
+    });
+  });
+
+  describe('setMeal', () => {
+    it('✅ should be defined', () => {
+      sut = getSut();
+
+      expect(sut.setMeal).toBeDefined();
     });
   });
 });

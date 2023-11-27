@@ -1,6 +1,7 @@
 import {MMKV} from 'react-native-mmkv';
 
-import {MenuItem} from '../../data/types';
+import {Meal, MenuItem} from '../../data/types';
+import {MealFactory} from '../../data';
 
 export const mmkv = new MMKV();
 
@@ -10,11 +11,16 @@ export interface IStore {
   getMenuItems(): MenuItem[];
   setMenuItem: (menuItem: MenuItem) => void;
   getMenuItem: (menuItemName: string) => MenuItem | undefined;
+
+  getMeal: () => Meal | undefined;
+  setMeal: (meal: Meal) => void;
+
   clearStore: () => void;
 }
 
 export const StorePrefixMap = {
   MENU_ITEMS: 'menuItems.',
+  MEAL: 'meal',
 };
 
 export class Store implements IStore {
@@ -77,6 +83,24 @@ export class Store implements IStore {
     const targetVal: string = this.store.getString(targetKey) ?? '';
 
     return JSON.parse(targetVal);
+  };
+
+  getMeal = (): Meal | undefined => {
+    const meal = this.store.getString('meal');
+
+    if (!meal) {
+      return undefined;
+    }
+
+    const parsedMeal = JSON.parse(meal) as unknown as Meal;
+
+    console.log(parsedMeal.serviceTime);
+
+    return new MealFactory().generateMeal(parsedMeal.serviceTime);
+  };
+
+  setMeal = (meal: Meal): void => {
+    this.store.set(StorePrefixMap.MEAL, JSON.stringify(meal));
   };
 
   clearStore = (): void => {
