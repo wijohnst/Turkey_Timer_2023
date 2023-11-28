@@ -25,9 +25,7 @@ export const AddItemForm = () => {
   const [prepTimeUnit, setPrepTimeUnit] = React.useState<PrepUnit>('minutes');
   const [hasValidationError, setHasValidationError] =
     React.useState<boolean>(false);
-  const [storedMenuItems, setStoredMenuItems] = React.useState(
-    store.getMenuItems(),
-  );
+  const [storedMenuItems] = React.useState(store.getMenuItems());
 
   const handleNewItem = (): void => {
     if (!hasValidationError) {
@@ -115,9 +113,6 @@ export const AddItemForm = () => {
             onPress={() => handleContinue()}
             disabled={storedMenuItems.length === 0}
           />
-          {/* <Button title="View Store" onPress={printStore} /> */}
-          {/* <Button title="Clear Store" onPress={store.clearStore} /> */}
-          {/* <Button title="Clear Form" onPress={clearForm} /> */}
         </View>
       </View>
       <View style={styles.ValidationErrors}>

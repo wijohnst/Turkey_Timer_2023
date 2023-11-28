@@ -1,10 +1,9 @@
 import * as React from 'react';
 import {Text, View} from 'react-native';
+import {store} from '../../System/Store';
 
 export const PrepList = (): React.ReactElement => {
-  return (
-    <View>
-      <Text>PrepList</Text>
-    </View>
-  );
+  const menuItems = store.getMenuItems();
+
+  return <View></View>;
 };
