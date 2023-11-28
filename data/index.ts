@@ -9,6 +9,12 @@ export class MenuItemFactory implements IMenuItemFactory {
   private getPrepTimeInHours = (prepValue: string, prepUnit: PrepUnit) => {
     const prepNum = Number(prepValue);
 
+    if (Number.isNaN(prepNum)) {
+      console.error('prepValue is not a number');
+
+      return 1;
+    }
+
     switch (prepUnit) {
       case 'hours':
         return prepNum;

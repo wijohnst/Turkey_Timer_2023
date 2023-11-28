@@ -1,11 +1,13 @@
-export type MenuItem = {
+import {Duration} from 'date-fns';
+
+export interface MenuItem {
   /** UUID */
   id: string;
   /** Name of the dish of prep item */
   name: string;
   /** Prep time in hours */
   prepTime: number;
-};
+}
 
 export type PrepUnit = 'hours' | 'minutes';
 export interface IMenuItemFactory {
@@ -23,4 +25,17 @@ export type Meal = {
 
 export interface IMealFactory {
   generateMeal: (serviceDate: Date, serviceTime: Date) => Meal;
+}
+
+export type PrepStatus = 'to_do' | 'do_now' | 'done';
+
+export interface IPrepItem {
+  id: string;
+  name: string;
+  prepTime: number;
+  timeTillStart: Duration;
+}
+
+export interface IPrepItemFactory {
+  generatePrepItem: (menuItem: MenuItem, meal: Meal) => IPrepItem;
 }
