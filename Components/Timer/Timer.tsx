@@ -24,7 +24,7 @@ export const Timer = (): React.ReactElement => {
           horizontal={true}
         />
       </View>
-      <Button title="Clear Store" onPress={clearStore} />
+      {/* <Button title="Clear Store" onPress={clearStore} /> */}
     </SafeAreaView>
   );
 };
