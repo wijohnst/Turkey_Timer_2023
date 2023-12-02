@@ -1,5 +1,4 @@
 import {Duration} from 'date-fns';
-
 export interface MenuItem {
   /** UUID */
   id: string;
@@ -24,7 +23,7 @@ export type Meal = {
 };
 
 export interface IMealFactory {
-  generateMeal: (serviceDate: Date, serviceTime: Date) => Meal;
+  generateMeal: (serviceTime: Date) => Meal;
 }
 
 export type PrepStatus = 'to_do' | 'do_now' | 'done';
@@ -38,4 +37,10 @@ export interface IPrepItem {
 
 export interface IPrepItemFactory {
   generatePrepItem: (menuItem: MenuItem, meal: Meal) => IPrepItem;
+}
+
+export type PrepListMap = Map<PrepStatus, IPrepItem[]>;
+export interface IPrepList {
+  prepItems: IPrepItem[];
+  getPrepListMap: (now: Date) => PrepListMap;
 }
